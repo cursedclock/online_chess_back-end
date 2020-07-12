@@ -17,7 +17,7 @@ public class DatabaseMgr<T extends Serializable> implements Runnable {
     @Override
     public void run() {
         while (isRunning.get()) {
-            try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(path))) {
+            try (ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(path, false))) {
                 os.writeObject(database.object);
                 Thread.sleep(100);
             } catch (Exception e) {
