@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class DatabaseLoader {
     public static <T extends Serializable> ObjectWrapper<T> loadDatabase(String path, AtomicBoolean serverState){
         ObjectWrapper<T> outp = new ObjectWrapper<>();
+
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(path))){
             outp.object = (T)(is.readObject());
         } catch (Exception ignore){}
