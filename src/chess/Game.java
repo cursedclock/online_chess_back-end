@@ -32,14 +32,22 @@ public class Game {
 
     {
         board = new ConcurrentHashMap<>();
-        //TODO initial chess piece placement
         for (int i=0; i<8; i++){
             board.put(new Position(i, 1), new Pawn(Colour.WHITE));
             board.put(new Position(i, 6), new Pawn(Colour.BLACK));
         }
+        for (int i=0; i<8; i+=7){
+            Colour c = (i==0? Colour.WHITE:Colour.BLACK);
+            board.put(new Position(0,i), new Rook(c));
+            board.put(new Position(1,i), new Bishop(c));
+            board.put(new Position(2,i), new Knight(c));
+            board.put(new Position(3,i), (i==0? new King(c):new Queen(c)));
+            board.put(new Position(4,i), (i==7? new King(c):new Queen(c)));
+            board.put(new Position(5,i), new Knight(c));
+            board.put(new Position(6,i), new Bishop(c));
+            board.put(new Position(7,i), new Rook(c));
+        }
     }
-
-
 
     public void move(String player, Position p1, Position p2){
         validateGameState();
