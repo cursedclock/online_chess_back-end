@@ -9,19 +9,18 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class Game {
-    private ConcurrentMap<Position, Piece> board;
-    private List<Piece> whiteCaptured;
-    private List<Piece> blackCaptured;
+    private final ConcurrentMap<Position, Piece> board;
+    private final List<Piece> whiteCaptured;
+    private final List<Piece> blackCaptured;
+    private final String whitePlayer;
+    private final String blackPlayer;
+    private final Date time;
     private int turns;
-    private String whitePlayer;
-    private String blackPlayer;
     private String winner;
     private Colour turn;
-    Date time;
 
 
     public Game(String p1, String p2){
-        board = new ConcurrentHashMap<>();
         whitePlayer = p1;
         blackPlayer = p2;
         whiteCaptured = new Vector<>();
@@ -32,12 +31,15 @@ public class Game {
     }
 
     {
+        board = new ConcurrentHashMap<>();
         //TODO initial chess piece placement
         for (int i=0; i<8; i++){
             board.put(new Position(i, 1), new Pawn(Colour.WHITE));
             board.put(new Position(i, 6), new Pawn(Colour.BLACK));
         }
     }
+
+
 
     public void move(String player, Position p1, Position p2){
         validateGameState();
@@ -48,6 +50,7 @@ public class Game {
         if (turn==Colour.WHITE){
             turns++;
         }
+        iterateTurn();
 
         if (board.containsKey(p2)) {
             if (turn == Colour.BLACK) {
@@ -56,6 +59,7 @@ public class Game {
                 blackCaptured.add(board.get(p2));
             }
         }
+
         board.put(p2, board.get(p1));
         board.remove(p1);
     }
@@ -69,6 +73,14 @@ public class Game {
             return true;
         }
         return false;
+    }
+
+    private void iterateTurn(){
+        if (turn==Colour.WHITE){
+            turn = Colour.BLACK;
+        } else{
+            turn = Colour.WHITE;
+        }
     }
 
     private void validateTurn(String player){
