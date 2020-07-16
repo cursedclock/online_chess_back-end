@@ -50,7 +50,7 @@ public class Game implements Serializable {
         }
     }
 
-    public void move(String player, Position p1, Position p2){
+    public synchronized void move(String player, Position p1, Position p2){
         validateGameState();
         validateTurn(player);
         validatePositions(p1, p2);
@@ -77,11 +77,7 @@ public class Game implements Serializable {
         if (winner != null){
             return false;
         }
-        if (player.equals(whitePlayer) && turn == Colour.WHITE
-            || player.equals(blackPlayer) && turn == Colour.BLACK){
-            return true;
-        }
-        return false;
+        return player.equals(whitePlayer) && turn == Colour.WHITE || player.equals(blackPlayer) && turn == Colour.BLACK;
     }
 
     private void iterateTurn(){
@@ -108,7 +104,7 @@ public class Game implements Serializable {
         }
     }
 
-    public void leave(String player){
+    public synchronized void leave(String player){
         if (player.equals(whitePlayer)){
             winner = blackPlayer;
         } else{

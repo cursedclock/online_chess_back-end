@@ -3,6 +3,7 @@ package server.database;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DatabaseLoader {
@@ -10,7 +11,7 @@ public class DatabaseLoader {
         ObjectWrapper<T> outp = new ObjectWrapper<>();
 
         try (ObjectInputStream is = new ObjectInputStream(new FileInputStream(path))){
-            outp.object = (T)(is.readObject());
+            outp.object = (T) is.readObject();
         } catch (Exception ignore){}
 
         Thread writerThread = new Thread(new DatabaseMgr<T>(outp, path, serverState));
