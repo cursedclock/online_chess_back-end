@@ -2,13 +2,14 @@ package chess;
 
 import chess.pieces.*;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class Game {
+public class Game implements Serializable {
     private final ConcurrentMap<Position, Piece> board;
     private final List<Piece> whiteCaptured;
     private final List<Piece> blackCaptured;

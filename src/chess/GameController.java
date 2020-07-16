@@ -1,6 +1,8 @@
 package chess;
 
-public class GameController {
+import java.io.Serializable;
+
+public class GameController implements Serializable {
     private final Game game;
     private final String player;
 

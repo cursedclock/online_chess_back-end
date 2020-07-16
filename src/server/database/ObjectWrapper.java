@@ -12,8 +12,4 @@ public class ObjectWrapper<T> {
     public ObjectWrapper(){
         object = null;
     }
-
-    public T get(){
-        return object;
-    }
 }

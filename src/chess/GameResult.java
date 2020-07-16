@@ -1,8 +1,9 @@
 package chess;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class GameResult {
+public class GameResult implements Serializable {
     public final Date time;
     public final boolean won;
     public final String opponent;

@@ -47,7 +47,7 @@ public class Server implements Runnable {
 
     private void loadDatabase(){
         registeredUsers = DatabaseLoader.loadDatabase(databasePath, isRunning);
-        if (registeredUsers.get()==null){
+        if (registeredUsers.object==null){
             registeredUsers.object = new ConcurrentHashMap<>();
         }
     }

@@ -2,9 +2,10 @@ package chess.pieces;
 
 import chess.Position;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public abstract class Piece {
+public abstract class Piece implements Serializable {
     protected final Colour colour;
 
     public Piece(Colour colour){
