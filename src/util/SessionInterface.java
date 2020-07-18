@@ -10,6 +10,7 @@ public interface SessionInterface {
     void sendRequest(String username);
     void declineRequest(String username);
     void cancelRequest();
+    void searchFor(String searchTerm);
     // in-game
     void move(int c1, int r1, int c2, int r2);
     void leaveGame();

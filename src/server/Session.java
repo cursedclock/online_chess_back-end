@@ -20,6 +20,7 @@ public class Session implements Runnable, SessionInterface {
     private AtomicBoolean serverState;
     private AtomicBoolean isRunning;
     private String message;
+    private String searchTerm;
     private User user;
 
 
@@ -34,6 +35,7 @@ public class Session implements Runnable, SessionInterface {
         this.registeredUsers = registeredUsers;
         isRunning = new AtomicBoolean(true);
         message = "";
+        searchTerm = "";
         this.serverState = serverState;
     }
 
@@ -80,7 +82,7 @@ public class Session implements Runnable, SessionInterface {
     }
 
     private ServerState getState(){
-        User[] onlineUsrs = (User[])onlineUsers.toArray();
+        User[] onlineUsrs = (User[])onlineUsers.stream().filter(a -> a.getUsername().startsWith(searchTerm)).toArray();
         User[] leaderboard = (User[]) registeredUsers.object.values().toArray();
         Arrays.sort(leaderboard);
         return new ServerState(user, onlineUsrs, leaderboard, message);
@@ -247,6 +249,11 @@ public class Session implements Runnable, SessionInterface {
         } catch (Exception e){
             message = "!"+e.getMessage();
         }
+    }
+
+    @Override
+    public void searchFor(String searchTerm) {
+        this.searchTerm = searchTerm;
     }
 
     @Override
