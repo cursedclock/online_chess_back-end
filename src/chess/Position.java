@@ -3,14 +3,8 @@ package chess;
 import java.io.Serializable;
 
 public class Position implements Serializable {
-    public static final Position HIT = new Position();
-
     private Integer col;
     private Integer row;
-
-    private Position(){
-        set(-1,-1);
-    }
 
     public Position(int c, int r){
         verify(c, r);

@@ -182,4 +182,9 @@ public class User implements Serializable, Comparable<User> {
     public int hashCode() {
         return username.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return username;
+    }
 }

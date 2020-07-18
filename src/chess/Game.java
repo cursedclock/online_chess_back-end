@@ -125,11 +125,11 @@ public class Game implements Serializable {
     }
 
     public GameResult getWhiteResult(){
-        return new GameResult(winner.equals(whitePlayer), time, blackPlayer, turns, blackCaptured.size(), whiteCaptured.size());
+        return new GameResult(winner.equals(whitePlayer), time, blackPlayer, turns, List.copyOf(blackCaptured), List.copyOf(whiteCaptured));
     }
 
     public GameResult getBlackResult(){
-        return new GameResult(winner.equals(blackPlayer), time, whitePlayer, turns, whiteCaptured.size(), blackCaptured.size());
+        return new GameResult(winner.equals(blackPlayer), time, whitePlayer, turns, List.copyOf(whiteCaptured), List.copyOf(blackCaptured));
     }
 
     private void validateGameState(){

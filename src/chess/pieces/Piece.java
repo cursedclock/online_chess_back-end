@@ -17,5 +17,10 @@ public abstract class Piece implements Serializable {
     public boolean isColour(Colour colour){
         return  this.colour == colour;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
 }
 
