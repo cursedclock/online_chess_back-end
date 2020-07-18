@@ -51,4 +51,8 @@ public class Server implements Runnable {
             registeredUsers.object = new ConcurrentHashMap<>();
         }
     }
+
+    public static void main(String[] args) {
+        new Thread(new Server(2077, "database.ser")).start();
+    }
 }

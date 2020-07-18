@@ -15,8 +15,8 @@ public class DatabaseLoader {
         } catch (Exception ignore){}
 
         Thread writerThread = new Thread(new DatabaseMgr<T>(outp, path, serverState));
-        writerThread.start();
         writerThread.setDaemon(true);
+        writerThread.start();
         return outp;
     }
 }
