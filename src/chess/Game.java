@@ -105,6 +105,7 @@ public class Game implements Serializable {
     }
 
     public synchronized void leave(String player){
+        validateGameState();
         if (player.equals(whitePlayer)){
             winner = blackPlayer;
         } else{
