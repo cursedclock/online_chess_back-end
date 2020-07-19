@@ -258,6 +258,10 @@ public class Session implements Runnable, SessionInterface {
 
     @Override
     public void sendMessage(String message){
-
+        try {
+            user.sendMessage(message);
+        } catch (Exception e){
+            this.message = "!"+e.getMessage();
+        }
     }
 }

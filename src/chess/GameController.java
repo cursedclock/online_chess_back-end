@@ -1,6 +1,7 @@
 package chess;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class GameController implements Serializable {
     private final Game game;
@@ -17,6 +18,18 @@ public class GameController implements Serializable {
 
     public void leave(){
         game.leave(player);
+    }
+
+    public void sendMessage(String message){
+        game.sendMessage(player, message);
+    }
+
+    public List<String> getMessages(){
+        return game.getMessages(player);
+    }
+
+    public List<String> getYourMessages(){
+        return game.getYourMessages(player);
     }
 
     public boolean isTurn(){

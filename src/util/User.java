@@ -85,6 +85,7 @@ public class User implements Serializable, Comparable<User> {
             return;
         }
         currentGame.move(new Position(c1, r1), new Position(c2, r2));
+        checkEndGame();
     }
 
     public void move(String c1, int r1, String c2, int r2){
@@ -93,6 +94,7 @@ public class User implements Serializable, Comparable<User> {
             return;
         }
         currentGame.move(new Position(c1, r1), new Position(c2, r2));
+        checkEndGame();
     }
 
     public void leaveGame(){
@@ -101,11 +103,22 @@ public class User implements Serializable, Comparable<User> {
             return;
         }
         currentGame.leave();
+        checkEndGame();
     }
 
     public void sendMessage(String message){
         validateInGame();
-        // TODO send message
+        currentGame.sendMessage(message);
+    }
+
+    public List<String> getMessages(){
+        validateInGame();
+        return currentGame.getMessages();
+    }
+
+    public List<String> getYourMessages(){
+        validateInGame();
+        return currentGame.getYourMessages();
     }
 
     private boolean checkEndGame(){

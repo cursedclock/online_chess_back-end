@@ -3,6 +3,7 @@ package chess;
 import chess.pieces.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
@@ -19,6 +20,8 @@ public class Game implements Serializable {
     private int turns;
     private String winner;
     private Colour turn;
+    private List<String> whiteMessages;
+    private List<String> blackMessages;
 
 
     public Game(String p1, String p2){
@@ -29,6 +32,8 @@ public class Game implements Serializable {
         turns = 0;
         turn = Colour.WHITE;
         time = new Date();
+        whiteMessages = new ArrayList<>();
+        blackMessages = new ArrayList<>();
     }
 
     {
@@ -122,6 +127,22 @@ public class Game implements Serializable {
         } else{
             return getBlackResult();
         }
+    }
+
+    public void sendMessage(String  player, String message){
+        validateGameState();
+        List<String> messages = (player.equals(whitePlayer)? whiteMessages:blackMessages);
+        messages.add(message);
+    }
+
+    public List<String> getMessages(String player){
+        List<String> messages = (player.equals(whitePlayer)? blackMessages:whiteMessages);
+        return List.copyOf(messages);
+    }
+
+    public List<String> getYourMessages(String player){
+        List<String> messages = (player.equals(whitePlayer)? whiteMessages:blackMessages);
+        return List.copyOf(messages);
     }
 
     public GameResult getWhiteResult(){
